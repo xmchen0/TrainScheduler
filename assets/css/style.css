@@ -1,0 +1,23 @@
+body {
+    font-size: 16px;
+}
+
+.jumbotron-custom {
+    background-image: url("../banner.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #17234E;
+}
+
+footer {
+    bottom: 0;
+    width: 100%;
+    margin-top: 2%;
+    position: absolute;
+    background-color: #f5f5f5;
+}
+
+.footer-block {
+    margin: 10px 0;
+}
