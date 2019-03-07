@@ -2,18 +2,10 @@
 
 UofT Boot Camp -- Train Scheduler
 
-Credit references to week 07 - activity 19 Add_Child
-
 */
 
 
 $(document).ready(function () {
-    // Current Date and Time
-    var currentTime = new Date()
-    var hours = currentTime.getHours()
-    var minutes = currentTime.getMinutes()
-
-    $('#currentDateTime').html("<b>" + hours + ":" + minutes + " " + "</b>");
 
     // Initialize Firebase
     var config = {
@@ -53,15 +45,33 @@ $(document).ready(function () {
             frequency: frequency,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
-
-        // Firebase watcher + initial loader
-        database.ref().on("child_added", function (childSnapshot) {
-     
-
-            // Handle the errors
-        }, function (errorObject) {
-            console.log("Errors handled: " + errorObject.code);
-        });
+        // Reset form
+        $("form")[0].reset();
     });
 
+    // Firebase watcher + initial loader
+    database.ref().on("child_added", function (childSnapshot) {
+        var nextArr;
+        var minsAway;
+        // Change year so first train comes before now
+        var firstTrainNew = moment(childSnapshot.val().firstTrain, "hh:mm").subtract(1, "years");
+        // Difference between the current and firstTrain
+        var diffTime = moment().diff(moment(firstTrainNew), "minutes");
+        var remainder = diffTime % childSnapshot.val().frequency;
+        // Minutes until next train
+        var minsAway = childSnapshot.val().frequency - remainder;
+        // Calculate next train time
+        var nextTrain = moment().add(minsAway, "minutes");
+        nextTrain = moment(nextTrain).format("hh:mm");
+
+        $("#addTrain").append("<tr><td>" + childSnapshot.val().name +
+            "</td><td>" + childSnapshot.val().destination +
+            "</td><td>" + childSnapshot.val().frequency +
+            "</td><td>" + nextTrain +
+            "</td><td>" + minsAway + "</td></tr>");
+
+        // Handle the errors
+    }, function (errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+    });
 });

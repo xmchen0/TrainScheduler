@@ -7,10 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Link to CSS-->
     <link rel="stylesheet" href="assets/css/style.css">
-    <!--Link to reset CSS-->
-    <link rel="stylesheet" href="assets/css/reset.css">
     <!--Link to Google Fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Coiny" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!--Link to Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -29,63 +27,73 @@
         <div class="row">
             <!--Heading-->
             <div class="jumbotron text-center jumbotron-custom">
-                <h1>Train Scheduler<br><small id="currentDateTime"></small></h1>
+                <h1>Train Scheduler</h1>
+                <p>Platform 9¾ at King's Cross Station</p>
             </div>
-            <!--Current Train Schedule Table-->
-            <div class="panel panel-info text-info">
-                <div class="panel-heading">
-                    <h3>Current Train Schedule</h3>
-                </div>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Train Name</th>
-                            <th>Destination</th>
-                            <th>Frequency (min)</th>
-                            <th>Next Arrival</th>
-                            <th>Minutes Away</th>
-                        </tr>
-                    </thead>
-                    <!--Populate Current Train Schedule-->
-                    <tbody id="addTrain"></tbody>
-                </table>
-            </div>
-            <br><br>
             <!--Add Train, User Form and Submit Button-->
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <div style="padding-top:10px;padding-bottom:30px;padding-left:0px;padding-right:100px">
-                        <h3>Add Train</h3>
+                    <div class="panel panel-default col-xs-12 form-group" id="panel1">
+                        <div style="padding-top:10px;padding-bottom:30px;padding-left:0px;padding-right:100px">
+                            <h3>1. Add Train</h3>
+                        </div>
+                        <form>
+                            <!--Train Name-->
+                            <div class="form-group">
+                                <label for="text">Train Name</label>
+                                <input id="trainNameInput" type="text" class="form-control"
+                                    placeholder="Hogwarts Express">
+                            </div>
+                            <!--Destination-->
+                            <div class="form-group">
+                                <label for="text">Destination</label>
+                                <input id="destinationInput" type="text" class="form-control"
+                                    placeholder="123 Gryffindor Street">
+                            </div>
+                            <!--First Train Time-->
+                            <div class="form-group">
+                                <label for="text">First Train Time (HH:mm - military time)</label>
+                                <input id="firstTrainTimeInput" type="text" class="form-control" placeholder="7:30">
+                            </div>
+                            <!--Frequency-->
+                            <div class="form-group">
+                                <label for="text">Frequency (min)</label>
+                                <input id="frequencyInput" type="text" class="form-control" placeholder="10">
+                            </div>
+                            <!--Submit and Reset Button-->
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <div class="form-group">
+                                        <button id="submitBtn" class="btn btn-info" style="width: 100px;"
+                                            type="submit">Submit</button>
+                                        <input id="resetBtn" type="reset" class="btn btn-danger" style="width: 100px;"
+                                            value="Reset"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <form>
-                        <div class="form-group">
-                            <label for="text">Train Name</label>
-                            <input id="trainNameInput" type="text" class="form-control" placeholder="eg. Metro">
+                    <!--Current Train Schedule Table-->
+                    <div class="panel panel-default col-xs-12 form-group" id="panel2">
+                        <div>
+                            <h3>2. Current Train Schedule</h3>
                         </div>
-                        <div class="form-group">
-                            <label for="text">Destination</label>
-                            <input id="destinationInput" type="text" class="form-control"
-                                placeholder="eg. 123 Seasame Street">
-                        </div>
-                        <div class="form-group">
-                            <label for="text">First Train Time (HH:mm - military time)</label>
-                            <input id="firstTrainTimeInput" type="text" class="form-control" placeholder="eg. 07:30">
-                        </div>
-                        <div class="form-group">
-                            <label for="text">Frequency (min)</label>
-                            <input id="frequencyInput" type="text" class="form-control" placeholder="eg. 3">
-                        </div>
-                        <button id="submitBtn" class="btn btn-primary mb-2" type="submit">Submit</button>
-                        <div style="padding-top:20px;padding-bottom:30px;padding-left:0px;padding-right:100px">
-                        </div>
-                    </form>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Train Name</th>
+                                    <th>Destination</th>
+                                    <th>Frequency (min)</th>
+                                    <th>Next Arrival</th>
+                                    <th>Minutes Away</th>
+                                </tr>
+                            </thead>
+                            <!--Populate Current Train Schedule-->
+                            <tbody id="addTrain"></tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>
-        <!--Footer-->
-        <footer class="footer navbar-fixed-bottom text-center">
-            <p class="footer-block">© 2019 Xiao Mei (Kathy) Chen</p>
-        </footer>
 </body>
 
 </html>
