@@ -51,9 +51,8 @@ $(document).ready(function () {
 
     // Firebase watcher + initial loader
     database.ref().on("child_added", function (childSnapshot) {
-        var nextArr;
         var minsAway;
-        // Change year so first train comes before now
+        // Subtract 1 year as firstTrain comes before now making the new firstTrain
         var firstTrainNew = moment(childSnapshot.val().firstTrain, "hh:mm").subtract(1, "years");
         // Difference between the current and firstTrain
         var diffTime = moment().diff(moment(firstTrainNew), "minutes");
